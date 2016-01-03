@@ -1,4 +1,4 @@
-package com.flarestar.bdd.tests.functional;
+package com.flarestar.bdd.tests.functional.tests;
 
 import flarestar.bdd.annotations.Describe;
 import flarestar.bdd.annotations.It;

@@ -10,8 +10,7 @@ import org.junit.runner.Description;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * TODO
@@ -20,6 +19,7 @@ public class BddSuite implements Test, Describable {
 
     private Class<?> testKlass;
     private Class<?>[] testTargets;
+    private String customDescription;
     private List<Test> tests;
     private Method beforeMethod;
     private Method afterMethod;
@@ -34,9 +34,10 @@ public class BddSuite implements Test, Describable {
             throw new IllegalArgumentException("Test class " + testKlass + " must be annotated w/ @Describe.");
         }
 
-        this.testTargets = annotation.value();
+        testTargets = annotation.value();
+        customDescription = annotation.desc();
 
-        this.tests = getDescribeSuiteTests(testKlass);
+        tests = getDescribeSuiteTests(testKlass);
 
         beforeMethod = getOptionalMethod("before");
         afterMethod = getOptionalMethod("after");
@@ -134,7 +135,11 @@ public class BddSuite implements Test, Describable {
         StringBuilder result = new StringBuilder();
         result.append(testKlass.getName());
 
-        if (testTargets.length > 0) {
+        if (customDescription != null && !customDescription.isEmpty()) {
+            result.append(" [tests ");
+            result.append(customDescription);
+            result.append("]");
+        } else if (testTargets.length > 0) {
             result.append(" [tests ");
             for (int i = 0; i != testTargets.length; ++i) {
                 if (i != 0) {
@@ -165,8 +170,15 @@ public class BddSuite implements Test, Describable {
             tests.add(new BddSuite(childClass));
         }
 
+        List<Method> methods = Arrays.asList(testKlass.getDeclaredMethods());
+        Collections.sort(methods, new Comparator<Method>() {
+            public int compare(Method method1, Method method2) {
+                return method1.getName().compareTo(method2.getName());
+            }
+        });
+
         // add method tests
-        for (Method method : testKlass.getDeclaredMethods()) {
+        for (Method method : methods) {
             It annotation = method.getAnnotation(It.class);
             if (annotation == null) {
                 continue;
