@@ -11,9 +11,11 @@ import java.util.Map;
 public class ContainsAllKeysMatcher extends BaseMatcher<Map<?, ?>> {
 
     private Object[] expectedKeys;
+    private boolean checkExact;
 
-    public ContainsAllKeysMatcher(Object[] expectedKeys) {
+    public ContainsAllKeysMatcher(Object[] expectedKeys, boolean checkExact) {
         this.expectedKeys = expectedKeys;
+        this.checkExact = checkExact;
     }
 
     public boolean matches(Object o) {
@@ -23,7 +25,12 @@ public class ContainsAllKeysMatcher extends BaseMatcher<Map<?, ?>> {
                 return false;
             }
         }
-        return true;
+
+        if (checkExact) {
+            return map.size() == expectedKeys.length;
+        } else {
+            return true;
+        }
     }
 
     public void describeTo(Description description) {

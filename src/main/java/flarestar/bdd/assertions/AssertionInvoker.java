@@ -33,12 +33,6 @@ public interface AssertionInvoker {
     AssertionInvoker and();
 
     @ChainableMethod
-    AssertionInvoker has();
-
-    @ChainableMethod
-    AssertionInvoker have();
-
-    @ChainableMethod
     AssertionInvoker with();
 
     @ChainableMethod
@@ -65,6 +59,18 @@ public interface AssertionInvoker {
 
     @ChainableMethod(flag = AssertionFlags.ALL, value = "true")
     AssertionInvoker all();
+
+    @ChainableMethod(flag = AssertionFlags.CONTAINS, value = "true")
+    AssertionInvoker contain();
+
+    @ChainableMethod(flag = AssertionFlags.CONTAINS, value = "true")
+    AssertionInvoker include();
+
+    @ChainableMethod(flag = AssertionFlags.HAVE, value = "true")
+    AssertionInvoker has();
+
+    @ChainableMethod(flag = AssertionFlags.HAVE, value = "true")
+    AssertionInvoker have();
 
     // assertions
     @Assertion(klass = Asserts.class, method = "assertSame", args = {Object.class})

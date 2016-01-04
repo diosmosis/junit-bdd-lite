@@ -78,26 +78,38 @@ public class CalculatorTest {
     public void testKeysSuccess() {
         Map<String, String> values = makeTestMap();
 
-        expect(values).to().have().all().keys("key1", "key2", "key3");
+        expect(values).to().include().all().keys("key1", "key2", "key3");
     }
 
     @It("should pass when all().keys() used and map contains keys (fail)")
-    public void  testKeysFailure() {
+    public void testKeysFailure() {
         Map<String, String> values = makeTestMap();
-        expect(values).to().have().keys("key1", "notkey2");
+        expect(values).to().contain().keys("key1", "notkey2");
+    }
+
+    @It("should pass when have().all().keys() used and map contains all keys (pass)")
+    public void testHaveAllKeysSuccess() {
+        Map<String, String> values = makeTestMap();
+        expect(values).to().have().keys("key1", "key2", "key3");
+    }
+
+    @It("should pass when have().all().keys() used and map contains all keys (fail)")
+    public void testHaveAllKeysFailure() {
+        Map<String, String> values = makeTestMap();
+        expect(values).to().have().keys("key1", "key3");
     }
 
     @It("should pass when any().keys() used and map contains keys (pass)")
     public void testAnyKeysSuccess() {
         Map<String, String> values = makeTestMap();
 
-        expect(values).to().have().any().keys("notkey1", "key2");
+        expect(values).to().contain().any().keys("notkey1", "key2");
     }
 
     @It("should pass when any().keys() used and map contains keys (fail)")
     public void testAnyKeysFailure() {
         Map<String, String> values = makeTestMap();
-        expect(values).to().have().any().keys("notkey1", "notkey2");
+        expect(values).to().include().any().keys("notkey1", "notkey2");
     }
 
     @It("should pass when instanceOf() used (pass)")
