@@ -27,6 +27,8 @@ import java.nio.file.Paths;
 @Describe(desc = "system")
 public class RunnerTest {
 
+    private final static boolean REMOVE_STACKTRACE_FROM_OUTPUT = true;
+
     @It("should correctly run @Describe tests")
     public void testSystem() throws Throwable {
         Computer computer = new Computer();
@@ -42,11 +44,13 @@ public class RunnerTest {
 
                 String trace = each.getTrace();
 
-                String truncated = trace.substring(0, trace.indexOf("\n\tat"));
-                truncated = truncated.replaceAll("@[a-zA-Z0-9]+>", "@...>");
-                truncated = truncated.replaceAll("[ \t]+(\r\n?|\n)", "\n");
+                if (REMOVE_STACKTRACE_FROM_OUTPUT) {
+                    trace = trace.substring(0, trace.indexOf("\n\tat"));
+                    trace = trace.replaceAll("@[a-zA-Z0-9]+>", "@...>");
+                    trace = trace.replaceAll("[ \t]+(\r\n?|\n)", "\n");
+                }
 
-                printStream.println(truncated);
+                printStream.println(trace);
             }
         };
         jUnitCore.addListener(listener);

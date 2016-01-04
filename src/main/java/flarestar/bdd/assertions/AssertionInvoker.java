@@ -7,7 +7,7 @@ import flarestar.bdd.annotations.ChainableMethod;
  * TODO
  *
  * TODO: following chai.js methods are not currently implemented, but probably should be
- * -
+ * - deep()
  */
 public interface AssertionInvoker {
     // chainable no-op methods
@@ -90,4 +90,13 @@ public interface AssertionInvoker {
 
     @Assertion(klass = Asserts.class, method = "assertInstanceOf", args = {Class.class})
     void instanceOf(Class<?> klass);
+
+    @Assertion(klass = Asserts.class, method = "assertTruthy", args = {})
+    void ok();
+
+    @Assertion(klass = Asserts.class, method = "assertTrue", args = {})
+    void true_();
+
+    @Assertion(klass = Asserts.class, method = "assertFalse", args = {})
+    void false_();
 }

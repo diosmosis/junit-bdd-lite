@@ -91,6 +91,10 @@ public class AssertionInvocationHandler implements InvocationHandler {
             return args;
         }
 
+        if (args == null) {
+            return new Object[] {flags, value};
+        }
+
         Object[] result = new Object[args.length + 2];
         result[0] = flags;
         result[1] = value;

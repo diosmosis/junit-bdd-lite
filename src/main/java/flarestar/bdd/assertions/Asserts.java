@@ -2,7 +2,9 @@ package flarestar.bdd.assertions;
 
 import flarestar.bdd.assertions.matchers.ContainsAllKeysMatcher;
 import flarestar.bdd.assertions.matchers.ContainsAnyKeysMatcher;
+import flarestar.bdd.assertions.matchers.IsTruthyMatcher;
 import org.hamcrest.CoreMatchers;
+import org.hamcrest.Matcher;
 import org.junit.Assert;
 
 import java.util.Map;
@@ -55,6 +57,22 @@ public class Asserts {
         } else {
             Assert.assertThat(actualValue, CoreMatchers.instanceOf(expectedType));
         }
+    }
+
+    public static void assertTruthy(Map<String, String> flags, Object actualValue) {
+        Matcher<? super Object> matcher = new IsTruthyMatcher();
+        if (hasNegate(flags)) {
+            matcher = CoreMatchers.not(matcher);
+        }
+        Assert.assertThat(actualValue, matcher);
+    }
+
+    public static void assertTrue(Map<String, String> flags, Object actualValue) {
+        assertEquals(flags, actualValue, true);
+    }
+
+    public static void assertFalse(Map<String, String> flags, Object actualValue) {
+        assertEquals(flags, actualValue, false);
     }
 
     private static boolean hasNegate(Map<String, String> flags) {

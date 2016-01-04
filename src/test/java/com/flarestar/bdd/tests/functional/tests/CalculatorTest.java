@@ -122,6 +122,16 @@ public class CalculatorTest {
         expect(new Object()).to().be().instanceOf(Calculator.class);
     }
 
+    @It("should pass when a value is ok (pass)")
+    public void testOkSuccess() {
+        expect(5).to().be().ok();
+    }
+
+    @It("should pass when a value is ok (fail)")
+    public void testOkFailure() {
+        expect("").to().be().ok();
+    }
+
     private Map<String,String> makeTestMap() {
         Map<String, String> values = new HashMap<String, String>();
         values.put("key1", "val1");
