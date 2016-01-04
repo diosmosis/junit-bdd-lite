@@ -1,6 +1,6 @@
 package flarestar.bdd.assertions;
 
-import flarestar.bdd.annotations.Assertion;
+import flarestar.bdd.annotations.AssertionMethod;
 import flarestar.bdd.annotations.ChainableMethod;
 
 /**
@@ -73,30 +73,30 @@ public interface AssertionInvoker {
     AssertionInvoker have();
 
     // assertions
-    @Assertion(klass = Asserts.class, method = "assertSame")
+    @AssertionMethod(klass = Asserts.class, method = "assertSame")
     void same(Object expectedValue);
 
-    @Assertion(klass = Asserts.class, method = "assertEquals")
+    @AssertionMethod(klass = Asserts.class, method = "assertEquals")
     void equal(Object expectedValue);
 
-    @Assertion(klass = Asserts.class, method = "assertContainsKeys")
+    @AssertionMethod(klass = Asserts.class, method = "assertContainsKeys")
     void keys(Object... expectedKeys);
 
-    @Assertion(klass = Asserts.class, method = "assertInstanceOf")
+    @AssertionMethod(klass = Asserts.class, method = "assertInstanceOf")
     void a(Class<?> klass);
 
-    @Assertion(klass = Asserts.class, method = "assertInstanceOf")
+    @AssertionMethod(klass = Asserts.class, method = "assertInstanceOf")
     void an(Class<?> klass);
 
-    @Assertion(klass = Asserts.class, method = "assertInstanceOf")
+    @AssertionMethod(klass = Asserts.class, method = "assertInstanceOf")
     void instanceOf(Class<?> klass);
 
-    @Assertion(klass = Asserts.class, method = "assertTruthy")
+    @AssertionMethod(klass = Asserts.class, method = "assertTruthy")
     void ok();
 
-    @Assertion(klass = Asserts.class, method = "assertTrue")
+    @AssertionMethod(klass = Asserts.class, method = "assertTrue")
     void true_();
 
-    @Assertion(klass = Asserts.class, method = "assertFalse")
+    @AssertionMethod(klass = Asserts.class, method = "assertFalse")
     void false_();
 }

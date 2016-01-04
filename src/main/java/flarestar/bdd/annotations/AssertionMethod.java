@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface Assertion {
+public @interface AssertionMethod {
     Class<?> klass();
 
     String method();

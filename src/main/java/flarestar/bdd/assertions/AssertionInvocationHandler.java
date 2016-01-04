@@ -1,6 +1,6 @@
 package flarestar.bdd.assertions;
 
-import flarestar.bdd.annotations.Assertion;
+import flarestar.bdd.annotations.AssertionMethod;
 import flarestar.bdd.annotations.ChainableMethod;
 import flarestar.bdd.assertions.exceptions.InvalidAssertionInvokerMethod;
 
@@ -34,7 +34,7 @@ public class AssertionInvocationHandler implements InvocationHandler {
             return null;
         } else {
             throw new InvalidAssertionInvokerMethod("Don't know how to implement method " + method.getName()
-                + ", it's missing @ChainableMethod/@Assertion annotations.");
+                + ", it's missing @ChainableMethod/@AssertionMethod annotations.");
         }
     }
 
@@ -50,7 +50,7 @@ public class AssertionInvocationHandler implements InvocationHandler {
     private void invokeAssert(Method method, Object[] args) throws Throwable {
         args = addExtraArguments(args);
 
-        Assertion annotation = method.getAnnotation(Assertion.class);
+        AssertionMethod annotation = method.getAnnotation(AssertionMethod.class);
 
         Class<?> argClasses[] = getArgClasses(method);
 
@@ -58,12 +58,12 @@ public class AssertionInvocationHandler implements InvocationHandler {
         try {
             assertionMethod = annotation.klass().getMethod(annotation.method(), argClasses);
         } catch (NoSuchMethodException e) {
-            throw new InvalidAssertionInvokerMethod("Cannot find @Assertion method '" + annotation.method() + "' in "
+            throw new InvalidAssertionInvokerMethod("Cannot find @AssertionMethod method '" + annotation.method() + "' in "
                 + annotation.klass().getName() + ".", e);
         }
 
         if (!Modifier.isStatic(assertionMethod.getModifiers())) {
-            throw new InvalidAssertionInvokerMethod("Invalid @Assertion proxy method " + annotation.method()
+            throw new InvalidAssertionInvokerMethod("Invalid @AssertionMethod proxy method " + annotation.method()
                 + ": method must be static.");
         }
 
@@ -106,7 +106,7 @@ public class AssertionInvocationHandler implements InvocationHandler {
     }
 
     private boolean isAssertion(Method method) {
-        return method.getAnnotation(Assertion.class) != null;
+        return method.getAnnotation(AssertionMethod.class) != null;
     }
 
     private boolean isChainable(Method method) {
