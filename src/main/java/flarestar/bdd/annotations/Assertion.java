@@ -16,6 +16,4 @@ public @interface Assertion {
     Class<?> klass();
 
     String method();
-
-    Class<?>[] args();
 }

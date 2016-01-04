@@ -52,7 +52,7 @@ public class AssertionInvocationHandler implements InvocationHandler {
 
         Assertion annotation = method.getAnnotation(Assertion.class);
 
-        Class<?> argClasses[] = getArgClasses(annotation.args());
+        Class<?> argClasses[] = getArgClasses(method);
 
         Method assertionMethod;
         try {
@@ -78,11 +78,13 @@ public class AssertionInvocationHandler implements InvocationHandler {
         }
     }
 
-    private Class<?>[] getArgClasses(Class<?>[] args) {
-        Class<?>[] result = new Class<?>[args.length + 2];
+    private Class<?>[] getArgClasses(Method method) {
+        Class<?>[] methodArgs = method.getParameterTypes();
+
+        Class<?>[] result = new Class<?>[methodArgs.length + 2];
         result[0] = Map.class;
         result[1] = Object.class;
-        System.arraycopy(args, 0, result, 2, args.length);
+        System.arraycopy(methodArgs, 0, result, 2, methodArgs.length);
         return result;
     }
 

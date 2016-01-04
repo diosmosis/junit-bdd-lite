@@ -73,30 +73,30 @@ public interface AssertionInvoker {
     AssertionInvoker have();
 
     // assertions
-    @Assertion(klass = Asserts.class, method = "assertSame", args = {Object.class})
+    @Assertion(klass = Asserts.class, method = "assertSame")
     void same(Object expectedValue);
 
-    @Assertion(klass = Asserts.class, method = "assertEquals", args = {Object.class})
+    @Assertion(klass = Asserts.class, method = "assertEquals")
     void equal(Object expectedValue);
 
-    @Assertion(klass = Asserts.class, method = "assertContainsKeys", args = {Object[].class})
+    @Assertion(klass = Asserts.class, method = "assertContainsKeys")
     void keys(Object... expectedKeys);
 
-    @Assertion(klass = Asserts.class, method = "assertInstanceOf", args = {Class.class})
+    @Assertion(klass = Asserts.class, method = "assertInstanceOf")
     void a(Class<?> klass);
 
-    @Assertion(klass = Asserts.class, method = "assertInstanceOf", args = {Class.class})
+    @Assertion(klass = Asserts.class, method = "assertInstanceOf")
     void an(Class<?> klass);
 
-    @Assertion(klass = Asserts.class, method = "assertInstanceOf", args = {Class.class})
+    @Assertion(klass = Asserts.class, method = "assertInstanceOf")
     void instanceOf(Class<?> klass);
 
-    @Assertion(klass = Asserts.class, method = "assertTruthy", args = {})
+    @Assertion(klass = Asserts.class, method = "assertTruthy")
     void ok();
 
-    @Assertion(klass = Asserts.class, method = "assertTrue", args = {})
+    @Assertion(klass = Asserts.class, method = "assertTrue")
     void true_();
 
-    @Assertion(klass = Asserts.class, method = "assertFalse", args = {})
+    @Assertion(klass = Asserts.class, method = "assertFalse")
     void false_();
 }
