@@ -1,5 +1,9 @@
 in before
 in before each
+.in after each
+in before each
+.Ein after each
+in before each
 .Ein after each
 in before each
 .in after each
@@ -8,12 +12,14 @@ in before each
 in after
 
 Time:
-There were 2 failures:
+There were 3 failures:
 1) it should not fail this assertion(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError
-2) it should not throw an exception(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+2) it should subtract two values correctly(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+java.lang.AssertionError: expected:<-4> but was:<38>
+3) it should not throw an exception(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 com.flarestar.bdd.tests.functional.tests.Calculator$TemperTantrum: waaaaaah!
 
 FAILURES!!!
-Tests run: 3,  Failures: 2
+Tests run: 5,  Failures: 3
 

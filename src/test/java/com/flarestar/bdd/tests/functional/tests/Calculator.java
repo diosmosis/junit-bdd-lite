@@ -13,4 +13,12 @@ public class Calculator {
     public void failAtNotThrowing() throws TemperTantrum {
         throw new TemperTantrum("waaaaaah!");
     }
+
+    public int add(int lhs, int rhs) {
+        return lhs + rhs;
+    }
+
+    public int subtract(int lhs, int rhs) {
+        return lhs - rhs + 42;
+    }
 }

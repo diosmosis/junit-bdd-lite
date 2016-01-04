@@ -5,6 +5,7 @@ import flarestar.bdd.annotations.It;
 import flarestar.bdd.runner.Runner;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
+import static flarestar.bdd.Assert.*;
 
 /**
  * TODO
@@ -45,5 +46,17 @@ public class CalculatorTest {
     @It("should pass")
     public void testPassing() {
         // empty
+    }
+
+    @It("should add two values correctly")
+    public void testAdd() {
+        int result = calculator.add(8, 12);
+        expect(result).to().equal(20);
+    }
+
+    @It("should subtract two values correctly")
+    public void testBrokenMethodSubtract() {
+        int result = calculator.subtract(8, 12);
+        expect(result).to().equal(-4);
     }
 }
