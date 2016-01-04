@@ -5,6 +5,9 @@ import flarestar.bdd.annotations.ChainableMethod;
 
 /**
  * TODO
+ *
+ * TODO: following chai.js methods are not currently implemented, but probably should be
+ * -
  */
 public interface AssertionInvoker {
     // chainable no-op methods
@@ -51,6 +54,12 @@ public interface AssertionInvoker {
     @ChainableMethod(flag = AssertionFlags.NEGATE, value = "true")
     AssertionInvoker not();
 
+    @ChainableMethod(flag = AssertionFlags.ANY, value = "true")
+    AssertionInvoker any();
+
+    @ChainableMethod(flag = AssertionFlags.ALL, value = "true")
+    AssertionInvoker all();
+
     // assertions
     @Assertion(klass = Asserts.class, method = "assertSame", args = {Object.class})
     void a(Object expectedValue);
@@ -60,4 +69,7 @@ public interface AssertionInvoker {
 
     @Assertion(klass = Asserts.class, method = "assertEquals", args = {Object.class})
     void equal(Object expectedValue);
+
+    @Assertion(klass = Asserts.class, method = "assertContainsKeys", args = {Object[].class})
+    void keys(Object... expectedKeys);
 }

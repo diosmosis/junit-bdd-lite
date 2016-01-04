@@ -4,7 +4,15 @@ in before each
 in before each
 .Ein after each
 in before each
+.in after each
+in before each
 .Ein after each
+in before each
+.Ein after each
+in before each
+.Ein after each
+in before each
+.in after each
 in before each
 .in after each
 in before each
@@ -16,16 +24,24 @@ in before each
 in after
 
 Time:
-There were 4 failures:
-1) it should not fail this assertion(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+There were 6 failures:
+1) it should pass when any().keys() used and map contains keys (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+java.lang.AssertionError:
+Expected: map contains any key in ["notkey1", "notkey2"]
+     but: was <{key3=val3, key2=val2, key1=val1}>
+2) it should not fail this assertion (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError
-2) it should subtract two values correctly(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+3) it should subtract two values correctly (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError: expected:<-4> but was:<38>
-3) it should fail when value not equal to something(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+4) it should pass when all().keys() used and map contains keys (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+java.lang.AssertionError:
+Expected: map contains all keys in ["key1", "notkey2"]
+     but: was <{key3=val3, key2=val2, key1=val1}>
+5) it should fail when value not equal to something (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError: Values should be different. Actual: 4
-4) it should not throw an exception(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+6) it should not throw an exception (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 com.flarestar.bdd.tests.functional.tests.Calculator$TemperTantrum: waaaaaah!
 
 FAILURES!!!
-Tests run: 7,  Failures: 4
+Tests run: 11,  Failures: 6
 

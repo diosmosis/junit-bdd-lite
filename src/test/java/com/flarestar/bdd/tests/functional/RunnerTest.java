@@ -23,7 +23,7 @@ import java.nio.file.Paths;
 import java.util.Enumeration;
 
 /**
- * TODO
+ * Functional test that tests the whole system, including the JUnit output that is generated.
  */
 @RunWith(Runner.class)
 @Describe(desc = "system")
@@ -43,8 +43,11 @@ public class RunnerTest {
                 printStream.println(prefix + ") " + each.getTestHeader());
 
                 String trace = each.getTrace();
-                String firstLineOfTrace = trace.substring(0, trace.indexOf('\n'));
-                printStream.println(firstLineOfTrace);
+
+                String truncated = trace.substring(0, trace.indexOf("\n\tat"));
+                truncated = truncated.replaceAll("[ \t]+(\r\n?|\n)", "\n");
+
+                printStream.println(truncated);
             }
         };
         jUnitCore.addListener(listener);
