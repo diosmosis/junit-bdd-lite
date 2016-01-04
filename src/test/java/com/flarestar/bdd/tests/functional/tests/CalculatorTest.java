@@ -59,4 +59,14 @@ public class CalculatorTest {
         int result = calculator.subtract(8, 12);
         expect(result).to().equal(-4);
     }
+
+    @It("should pass when value not equal to something")
+    public void testNotChainable() {
+        expect(4).to().not().equal(10);
+    }
+
+    @It("should fail when value not equal to something")
+    public void testNotChainable_Failure() {
+        expect(4).to().not().equal(4);
+    }
 }

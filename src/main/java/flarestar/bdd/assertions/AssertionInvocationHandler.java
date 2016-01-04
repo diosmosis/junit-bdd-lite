@@ -8,6 +8,8 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * TODO
@@ -17,6 +19,7 @@ public class AssertionInvocationHandler implements InvocationHandler {
     public static final Object NO_VALUE = new Object();
 
     private Object value;
+    private Map<String, String> flags = new HashMap<String, String>();
 
     public AssertionInvocationHandler(Object value) {
         this.value = value;
@@ -24,6 +27,7 @@ public class AssertionInvocationHandler implements InvocationHandler {
 
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if (isChainable(method)) {
+            invokeChainable(proxy, method, args);
             return proxy;
         } else if (isAssertion(method)) {
             invokeAssert(method, args);
@@ -34,14 +38,25 @@ public class AssertionInvocationHandler implements InvocationHandler {
         }
     }
 
+    private void invokeChainable(Object proxy, Method method, Object[] args) {
+        ChainableMethod annotation = method.getAnnotation(ChainableMethod.class);
+
+        String flagToAdd = annotation.flag();
+        if (flagToAdd != null && !flagToAdd.isEmpty()) {
+            flags.put(flagToAdd, annotation.value());
+        }
+    }
+
     private void invokeAssert(Method method, Object[] args) throws Throwable {
-        args = addActualValueArgument(args);
+        args = addExtraArguments(args);
 
         Assertion annotation = method.getAnnotation(Assertion.class);
 
+        Class<?> argClasses[] = getArgClasses(annotation.args());
+
         Method assertionMethod;
         try {
-            assertionMethod = annotation.klass().getMethod(annotation.method(), annotation.args());
+            assertionMethod = annotation.klass().getMethod(annotation.method(), argClasses);
         } catch (NoSuchMethodException e) {
             throw new InvalidAssertionInvokerMethod("Cannot find @Assertion method '" + annotation.method() + "' in "
                 + annotation.klass().getName() + ".", e);
@@ -63,21 +78,23 @@ public class AssertionInvocationHandler implements InvocationHandler {
         }
     }
 
-    private Object[] addActualValueArgument(Object[] args) {
+    private Class<?>[] getArgClasses(Class<?>[] args) {
+        Class<?>[] result = new Class<?>[args.length + 2];
+        result[0] = Map.class;
+        result[1] = Object.class;
+        System.arraycopy(args, 0, result, 2, args.length);
+        return result;
+    }
+
+    private Object[] addExtraArguments(Object[] args) {
         if (value == NO_VALUE) {
             return args;
         }
 
-        Object[] result = new Object[args.length + 1];
-        if (args.length == 0) {
-            result[0] = value;
-        } else {
-            // we assume the expected value is the second argument in the proxied assert method
-            result[0] = args[0];
-            result[1] = value;
-
-            System.arraycopy(args, 1, result, 2, args.length - 1);
-        }
+        Object[] result = new Object[args.length + 2];
+        result[0] = flags;
+        result[1] = value;
+        System.arraycopy(args, 0, result, 2, args.length);
 
         return result;
     }
