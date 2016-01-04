@@ -8,7 +8,6 @@ import org.junit.Assert;
 import org.junit.internal.TextListener;
 import org.junit.runner.Computer;
 import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
 import org.junit.runner.RunWith;
 import org.junit.runner.notification.Failure;
 
@@ -20,7 +19,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Enumeration;
 
 /**
  * Functional test that tests the whole system, including the JUnit output that is generated.
@@ -45,6 +43,7 @@ public class RunnerTest {
                 String trace = each.getTrace();
 
                 String truncated = trace.substring(0, trace.indexOf("\n\tat"));
+                truncated = truncated.replaceAll("@[a-zA-Z0-9]+>", "@...>");
                 truncated = truncated.replaceAll("[ \t]+(\r\n?|\n)", "\n");
 
                 printStream.println(truncated);

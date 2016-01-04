@@ -48,6 +48,12 @@ public interface AssertionInvoker {
     AssertionInvoker of();
 
     @ChainableMethod
+    AssertionInvoker an();
+
+    @ChainableMethod
+    AssertionInvoker a();
+
+    @ChainableMethod
     AssertionInvoker same();
 
     // chainable methods that alter asserts
@@ -62,14 +68,20 @@ public interface AssertionInvoker {
 
     // assertions
     @Assertion(klass = Asserts.class, method = "assertSame", args = {Object.class})
-    void a(Object expectedValue);
-
-    @Assertion(klass = Asserts.class, method = "assertSame", args = {Object.class})
-    void an(Object expectedValue);
+    void same(Object expectedValue);
 
     @Assertion(klass = Asserts.class, method = "assertEquals", args = {Object.class})
     void equal(Object expectedValue);
 
     @Assertion(klass = Asserts.class, method = "assertContainsKeys", args = {Object[].class})
     void keys(Object... expectedKeys);
+
+    @Assertion(klass = Asserts.class, method = "assertInstanceOf", args = {Class.class})
+    void a(Class<?> klass);
+
+    @Assertion(klass = Asserts.class, method = "assertInstanceOf", args = {Class.class})
+    void an(Class<?> klass);
+
+    @Assertion(klass = Asserts.class, method = "assertInstanceOf", args = {Class.class})
+    void instanceOf(Class<?> klass);
 }

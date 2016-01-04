@@ -100,6 +100,16 @@ public class CalculatorTest {
         expect(values).to().have().any().keys("notkey1", "notkey2");
     }
 
+    @It("should pass when instanceOf() used (pass)")
+    public void testInstanceOfSuccess() {
+        expect(calculator).to().be().instanceOf(Calculator.class);
+    }
+
+    @It("should pass when instanceOf() used (fail)")
+    public void testInstanceOfFailure() {
+        expect(new Object()).to().be().instanceOf(Calculator.class);
+    }
+
     private Map<String,String> makeTestMap() {
         Map<String, String> values = new HashMap<String, String>();
         values.put("key1", "val1");
