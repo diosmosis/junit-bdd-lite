@@ -1,6 +1,6 @@
 # junit-bdd-lite
 
-Lightweight BDD for Java 5 and above.
+Lightweight BDD for Java 6 and above.
 
 ## Description
 
