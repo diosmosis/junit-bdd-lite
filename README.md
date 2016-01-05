@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/diosmosis/junit-bdd-lite.svg)](https://travis-ci.org/diosmosis/junit-bdd-lite)
+
 # junit-bdd-lite
 
 Lightweight BDD for Java 6 and above.
