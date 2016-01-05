@@ -142,6 +142,16 @@ public class CalculatorTest {
         expect("").to().be().null_();
     }
 
+    @It("should pass w/ .empty() when collection is empty (pass)")
+    public void testEmptySuccess() {
+        expect(new HashMap<String, String>()).to().be().empty();
+    }
+
+    @It("should pass w/ .empty() when collection is empty (fail)")
+    public void testEmptyFailure() {
+        expect(makeTestMap()).to().be().empty();
+    }
+
     private Map<String,String> makeTestMap() {
         Map<String, String> values = new HashMap<String, String>();
         values.put("key1", "val1");

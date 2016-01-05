@@ -102,4 +102,7 @@ public interface AssertionInvoker {
 
     @AssertionMethod(klass = Asserts.class, method = "assertNull")
     void null_();
+
+    @AssertionMethod(klass = Asserts.class, method = "assertEmpty")
+    void empty();
 }

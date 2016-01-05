@@ -2,6 +2,7 @@ package flarestar.bdd.assertions;
 
 import flarestar.bdd.assertions.matchers.ContainsAllKeysMatcher;
 import flarestar.bdd.assertions.matchers.ContainsAnyKeysMatcher;
+import flarestar.bdd.assertions.matchers.IsEmpty;
 import flarestar.bdd.assertions.matchers.IsTruthyMatcher;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.Matcher;
@@ -81,6 +82,14 @@ public class Asserts {
         } else {
             Assert.assertNull(actualValue);
         }
+    }
+
+    public static void assertEmpty(Map<String, String> flags, Object actualValue) {
+        Matcher<? super Object> matcher = new IsEmpty();
+        if (hasNegate(flags)) {
+            matcher = CoreMatchers.not(matcher);
+        }
+        Assert.assertThat(actualValue, matcher);
     }
 
     private static boolean hasNegate(Map<String, String> flags) {
