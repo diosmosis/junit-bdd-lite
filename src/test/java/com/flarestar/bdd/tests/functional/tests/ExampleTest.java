@@ -19,7 +19,7 @@ import static flarestar.bdd.Assert.*;
  */
 @RunWith(Runner.class)
 @Describe(Calculator.class)
-public class CalculatorTest {
+public class ExampleTest {
     private Calculator calculator;
 
     public static void before() {

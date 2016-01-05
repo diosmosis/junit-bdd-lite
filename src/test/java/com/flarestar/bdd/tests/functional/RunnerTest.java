@@ -1,6 +1,6 @@
 package com.flarestar.bdd.tests.functional;
 
-import com.flarestar.bdd.tests.functional.tests.CalculatorTest;
+import com.flarestar.bdd.tests.functional.tests.ExampleTest;
 import flarestar.bdd.annotations.Describe;
 import flarestar.bdd.annotations.It;
 import flarestar.bdd.runner.Runner;
@@ -58,7 +58,7 @@ public class RunnerTest {
         PrintStream systemOut = System.out;
         System.setOut(printStream);
         try {
-            jUnitCore.run(computer, CalculatorTest.class);
+            jUnitCore.run(computer, ExampleTest.class);
         } finally {
             System.setOut(systemOut);
         }
