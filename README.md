@@ -50,7 +50,7 @@ Mocha, this means you can nest `@Describe` tests just as you can in Mocha:
 public class MySomeFeatureTest {
 
     @Describe(desc = "some subsystem")
-    public class MySubsystemTest {
+    public static class MySubsystemTest {
         // ...
     }
 
