@@ -192,6 +192,16 @@ public class CalculatorTest {
         expect(3.1).to().be().at().most(3.09);
     }
 
+    @It("should pass w/ .assertWithin() when value is within range (pass)")
+    public void testWithinSuccess() {
+        expect(3.1).to().be().within(3.09f, 4L);
+    }
+
+    @It("should pass w/ .assertWithin() when value is within range (fail)")
+    public void testWithinFailure() {
+        expect(2).to().be().within(2.9f, 4.1);
+    }
+
     private Map<String,String> makeTestMap() {
         Map<String, String> values = new HashMap<String, String>();
         values.put("key1", "val1");

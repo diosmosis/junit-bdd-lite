@@ -137,6 +137,22 @@ public class Asserts {
         Assert.assertThat(actualValue, (Matcher)matcher);
     }
 
+    public static void assertWithin(Map<String, String> flags, Object actualValue, Comparable start, Comparable finish) {
+        // TODO: this upcasting stuff is truly annoying.
+        actualValue = upcastForComparison(actualValue, start);
+        actualValue = upcastForComparison(actualValue, finish);
+        start = upcastForComparison(start, actualValue);
+        start = upcastForComparison(start, finish);
+        finish = upcastForComparison(finish, actualValue);
+        finish = upcastForComparison(finish, start);
+
+        Matcher<?> matcher = Matchers.allOf(Matchers.greaterThanOrEqualTo(start), Matchers.lessThanOrEqualTo(finish));
+        if (hasNegate(flags)) {
+            matcher = Matchers.not(matcher);
+        }
+        Assert.assertThat(actualValue, (Matcher)matcher);
+    }
+
     private static Comparable upcastForComparison(Object toUpcast, Object toCompare) {
         if (!(toUpcast instanceof Number) || !(toCompare instanceof Number) || toUpcast.getClass() == toCompare.getClass()) {
             return (Comparable)toUpcast;

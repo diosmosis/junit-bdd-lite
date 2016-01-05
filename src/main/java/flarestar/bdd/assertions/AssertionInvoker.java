@@ -120,4 +120,7 @@ public interface AssertionInvoker {
 
     @AssertionMethod(klass = Asserts.class, method = "assertLessThanOrEqual")
     void most(Comparable expectedValue);
+
+    @AssertionMethod(klass = Asserts.class, method = "assertWithin")
+    void within(Comparable start, Comparable finish);
 }
