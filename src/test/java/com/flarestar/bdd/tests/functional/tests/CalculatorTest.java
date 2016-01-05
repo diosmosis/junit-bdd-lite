@@ -202,6 +202,16 @@ public class CalculatorTest {
         expect(2).to().be().within(2.9f, 4.1);
     }
 
+    @It("should pass w/ .length(...) when length of collection is equal (pass)")
+    public void testLengthSuccess() {
+        expect(new int[]{1, 2, 3}).to().have().length(3);
+    }
+
+    @It("should pass w/ .length(...) when length of collection is equal (fail)")
+    public void testLengthFailure() {
+        expect(makeTestMap()).to().have().length(1);
+    }
+
     private Map<String,String> makeTestMap() {
         Map<String, String> values = new HashMap<String, String>();
         values.put("key1", "val1");

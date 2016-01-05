@@ -123,4 +123,7 @@ public interface AssertionInvoker {
 
     @AssertionMethod(klass = Asserts.class, method = "assertWithin")
     void within(Comparable start, Comparable finish);
+
+    @AssertionMethod(klass = Asserts.class, method = "assertLengthIs")
+    void length(long expectedLength);
 }

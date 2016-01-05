@@ -1,9 +1,6 @@
 package flarestar.bdd.assertions;
 
-import flarestar.bdd.assertions.matchers.ContainsAllKeysMatcher;
-import flarestar.bdd.assertions.matchers.ContainsAnyKeysMatcher;
-import flarestar.bdd.assertions.matchers.IsEmpty;
-import flarestar.bdd.assertions.matchers.IsTruthyMatcher;
+import flarestar.bdd.assertions.matchers.*;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
@@ -147,6 +144,14 @@ public class Asserts {
         finish = upcastForComparison(finish, start);
 
         Matcher<?> matcher = Matchers.allOf(Matchers.greaterThanOrEqualTo(start), Matchers.lessThanOrEqualTo(finish));
+        if (hasNegate(flags)) {
+            matcher = Matchers.not(matcher);
+        }
+        Assert.assertThat(actualValue, (Matcher)matcher);
+    }
+
+    public static void assertLengthIs(Map<String, String> flags, Object actualValue, long expectedLength) {
+        Matcher<?> matcher = new LengthIsMatcher(expectedLength);
         if (hasNegate(flags)) {
             matcher = Matchers.not(matcher);
         }
