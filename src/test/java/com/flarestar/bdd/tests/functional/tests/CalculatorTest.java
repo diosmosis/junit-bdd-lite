@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import static flarestar.bdd.Assert.*;
 
@@ -220,6 +221,16 @@ public class CalculatorTest {
     @It("should change the value passed to expect() to the length when .length() is used in a chain (fail)")
     public void testLengthChainableFailure() {
         expect(makeTestMap()).to().have().length().above(10);
+    }
+
+    @It("should pass w/ .matches() when string matches pattern (pass)")
+    public void testMatchesSuccess() {
+        expect("ababbbabab").to().match(Pattern.compile("ab"));
+    }
+
+    @It("should pass w/ .matches() when string matches pattern (fail)")
+    public void testMatchesFailure() {
+        expect("ababbbabab").to().match(Pattern.compile("^ab$"));
     }
 
     private Map<String,String> makeTestMap() {

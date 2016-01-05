@@ -7,6 +7,7 @@ import org.hamcrest.Matchers;
 import org.junit.Assert;
 
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * TODO
@@ -151,11 +152,19 @@ public class Asserts {
     }
 
     public static void assertLengthIs(Map<String, String> flags, Object actualValue, long expectedLength) {
-        Matcher<?> matcher = new LengthIsMatcher(expectedLength);
+        Matcher<? super Object> matcher = new LengthIsMatcher(expectedLength);
         if (hasNegate(flags)) {
             matcher = Matchers.not(matcher);
         }
-        Assert.assertThat(actualValue, (Matcher)matcher);
+        Assert.assertThat(actualValue, matcher);
+    }
+
+    public static void assertMatchesPattern(Map<String, String> flags, Object actualValue, Pattern pattern) {
+        Matcher<? super Object> matcher = new RegexMatches(pattern);
+        if (hasNegate(flags)) {
+            matcher = Matchers.not(matcher);
+        }
+        Assert.assertThat(actualValue, matcher);
     }
 
     private static Comparable upcastForComparison(Object toUpcast, Object toCompare) {

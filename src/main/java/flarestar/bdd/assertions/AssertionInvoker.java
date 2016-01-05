@@ -4,6 +4,8 @@ import flarestar.bdd.annotations.AssertionMethod;
 import flarestar.bdd.annotations.ChainableMethod;
 import flarestar.bdd.assertions.manipulators.GetLengthOf;
 
+import java.util.regex.Pattern;
+
 /**
  * TODO
  *
@@ -130,4 +132,7 @@ public interface AssertionInvoker {
 
     @AssertionMethod(klass = Asserts.class, method = "assertLengthIs")
     void length(long expectedLength);
+
+    @AssertionMethod(klass = Asserts.class, method = "assertMatchesPattern")
+    void match(Pattern pattern);
 }
