@@ -135,4 +135,7 @@ public interface AssertionInvoker {
 
     @AssertionMethod(klass = Asserts.class, method = "assertMatchesPattern")
     void match(Pattern pattern);
+
+    @AssertionMethod(klass = Asserts.class, method = "assertContainsString")
+    void string(String substring);
 }

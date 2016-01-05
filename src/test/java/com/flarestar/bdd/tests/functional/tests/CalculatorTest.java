@@ -233,6 +233,16 @@ public class CalculatorTest {
         expect("ababbbabab").to().match(Pattern.compile("^ab$"));
     }
 
+    @It("should pass w/ .string() when string contains string (pass)")
+    public void testHasSubstringSuccess() {
+        expect("here is a string").to().have().string("is a");
+    }
+
+    @It("should pass w/ .string() when string contains string (fail)")
+    public void testHasSubstringFailure() {
+        expect("here is a string").to().have().string("ooga");
+    }
+
     private Map<String,String> makeTestMap() {
         Map<String, String> values = new HashMap<String, String>();
         values.put("key1", "val1");

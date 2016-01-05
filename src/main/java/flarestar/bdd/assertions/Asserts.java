@@ -167,6 +167,18 @@ public class Asserts {
         Assert.assertThat(actualValue, matcher);
     }
 
+    public static void assertContainsString(Map<String, String> flags, Object actualValue, String substring) {
+        if (!(actualValue instanceof String)) {
+            throw new IllegalArgumentException("Only strings can be used in expect(...) with the .string() assertion method.");
+        }
+
+        Matcher<String> matcher = Matchers.containsString(substring);
+        if (hasNegate(flags)) {
+            matcher = Matchers.not(matcher);
+        }
+        Assert.assertThat((String)actualValue, matcher);
+    }
+
     private static Comparable upcastForComparison(Object toUpcast, Object toCompare) {
         if (!(toUpcast instanceof Number) || !(toCompare instanceof Number) || toUpcast.getClass() == toCompare.getClass()) {
             return (Comparable)toUpcast;
