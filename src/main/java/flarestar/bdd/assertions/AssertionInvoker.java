@@ -2,6 +2,7 @@ package flarestar.bdd.assertions;
 
 import flarestar.bdd.annotations.AssertionMethod;
 import flarestar.bdd.annotations.ChainableMethod;
+import flarestar.bdd.assertions.manipulators.GetLengthOf;
 
 /**
  * TODO
@@ -74,6 +75,9 @@ public interface AssertionInvoker {
 
     @ChainableMethod(flag = AssertionFlags.HAVE, value = "true")
     AssertionInvoker have();
+
+    @ChainableMethod(manipulator = GetLengthOf.class)
+    AssertionInvoker length();
 
     // assertions
     @AssertionMethod(klass = Asserts.class, method = "assertSame")

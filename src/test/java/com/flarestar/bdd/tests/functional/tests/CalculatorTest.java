@@ -212,6 +212,16 @@ public class CalculatorTest {
         expect(makeTestMap()).to().have().length(1);
     }
 
+    @It("should change the value passed to expect() to the length when .length() is used in a chain (pass)")
+    public void testLengthChainableSuccess() {
+        expect(new int[]{1, 2, 3}).to().have().length().below(5);
+    }
+
+    @It("should change the value passed to expect() to the length when .length() is used in a chain (fail)")
+    public void testLengthChainableFailure() {
+        expect(makeTestMap()).to().have().length().above(10);
+    }
+
     private Map<String,String> makeTestMap() {
         Map<String, String> values = new HashMap<String, String>();
         values.put("key1", "val1");

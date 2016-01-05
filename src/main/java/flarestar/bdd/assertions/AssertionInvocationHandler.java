@@ -38,12 +38,18 @@ public class AssertionInvocationHandler implements InvocationHandler {
         }
     }
 
-    private void invokeChainable(Object proxy, Method method, Object[] args) {
+    private void invokeChainable(Object proxy, Method method, Object[] args) throws Throwable {
         ChainableMethod annotation = method.getAnnotation(ChainableMethod.class);
 
         String flagToAdd = annotation.flag();
         if (flagToAdd != null && !flagToAdd.isEmpty()) {
             flags.put(flagToAdd, annotation.value());
+        }
+
+        Class<? extends ValueManipulator> manipulatorClass = annotation.manipulator();
+        if (manipulatorClass != ValueManipulator.class) {
+            ValueManipulator manipulator = manipulatorClass.newInstance();
+            value = manipulator.manipulate(value);
         }
     }
 
