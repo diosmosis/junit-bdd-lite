@@ -179,6 +179,15 @@ public class Asserts {
         Assert.assertThat((String)actualValue, matcher);
     }
 
+    public static void assertEqualsWithPrecision(Map<String, String> flags, Object actualValue, double expectedValue,
+                                                 double precision) {
+        if (hasNegate(flags)) {
+            Assert.assertNotEquals(expectedValue, ((Number)actualValue).doubleValue(), precision);
+        } else {
+            Assert.assertEquals(expectedValue, ((Number)actualValue).doubleValue(), precision);
+        }
+    }
+
     private static Comparable upcastForComparison(Object toUpcast, Object toCompare) {
         if (!(toUpcast instanceof Number) || !(toCompare instanceof Number) || toUpcast.getClass() == toCompare.getClass()) {
             return (Comparable)toUpcast;

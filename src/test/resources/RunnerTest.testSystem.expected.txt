@@ -58,6 +58,10 @@ in before each
 in before each
 .in after each
 in before each
+.Ein after each
+in before each
+.in after each
+in before each
 .in after each
 in before each
 .Ein after each
@@ -80,7 +84,7 @@ in before each
 in after
 
 Time:
-There were 20 failures:
+There were 21 failures:
 1) it should pass w/ .above() when value is greater than expected (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError:
 Expected: a value greater than <2L>
@@ -97,61 +101,63 @@ Expected: a value less than <3.0>
      but: <3.0999999046325684> was greater than <3.0>
 5) it should subtract two values correctly (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError: expected:<-4> but was:<38>
-6) it should pass w/ .empty() when collection is empty (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+6) it should pass w/ .closeTo() when value within delta (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+java.lang.AssertionError: expected:<1.0> but was:<2.0>
+7) it should pass w/ .empty() when collection is empty (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError:
 Expected: is empty collection or empty string
      but: was <{key3=val3, key2=val2, key1=val1}>
-7) it should pass w/ .string() when string contains string (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+8) it should pass w/ .string() when string contains string (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError:
 Expected: a string containing "ooga"
      but: was "here is a string"
-8) it should pass when have().all().keys() used and map contains all keys (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+9) it should pass when have().all().keys() used and map contains all keys (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError:
 Expected: map contains all keys in ["key1", "key3"]
      but: was <{key3=val3, key2=val2, key1=val1}>
-9) it should pass when instanceOf() used (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+10) it should pass when instanceOf() used (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError:
 Expected: an instance of com.flarestar.bdd.tests.functional.tests.Calculator
      but: <java.lang.Object@...> is a java.lang.Object
-10) it should pass when all().keys() used and map contains keys (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+11) it should pass when all().keys() used and map contains keys (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError:
 Expected: map contains all keys in ["key1", "notkey2"]
      but: was <{key3=val3, key2=val2, key1=val1}>
-11) it should pass w/ .least() when value is >= expected (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+12) it should pass w/ .least() when value is >= expected (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError:
 Expected: a value equal to or greater than <3.0>
      but: <2.9> was less than <3.0>
-12) it should change the value passed to expect() to the length when .length() is used in a chain (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+13) it should change the value passed to expect() to the length when .length() is used in a chain (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError:
 Expected: a value greater than <10L>
      but: <3L> was less than <10L>
-13) it should pass w/ .length(...) when length of collection is equal (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+14) it should pass w/ .length(...) when length of collection is equal (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError:
 Expected: collection, array or string with length <1L>
      but: was <3L>
-14) it should pass w/ .matches() when string matches pattern (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+15) it should pass w/ .matches() when string matches pattern (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError:
 Expected: to match ^ab$
      but: was "ababbbabab"
-15) it should pass w/ .most() when value is <= expected (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+16) it should pass w/ .most() when value is <= expected (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError:
 Expected: a value less than or equal to <3.09>
      but: <3.1> was greater than <3.09>
-16) it should fail when value not equal to something (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+17) it should fail when value not equal to something (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError: Values should be different. Actual: 4
-17) it should pass w/ .null() when the value is null (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+18) it should pass w/ .null() when the value is null (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError: expected null, but was:<>
-18) it should pass w/ .ok() when a value is ok (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+19) it should pass w/ .ok() when a value is ok (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError:
 Expected: is ok (not null, not empty string, not false and not 0)
      but: was ""
-19) it should not throw an exception (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+20) it should not throw an exception (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 com.flarestar.bdd.tests.functional.tests.Calculator$TemperTantrum: waaaaaah!
-20) it should pass w/ .assertWithin() when value is within range (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+21) it should pass w/ .assertWithin() when value is within range (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError:
 Expected: (a value equal to or greater than <2.9000000953674316> and a value less than or equal to <4.1>)
      but: a value equal to or greater than <2.9000000953674316> <2.0> was less than <2.9000000953674316>
 
 FAILURES!!!
-Tests run: 39,  Failures: 20
+Tests run: 41,  Failures: 21
 

@@ -243,6 +243,16 @@ public class CalculatorTest {
         expect("here is a string").to().have().string("ooga");
     }
 
+    @It("should pass w/ .closeTo() when value within delta (pass)")
+    public void testCloseToSuccess() {
+        expect(24).to().be().closeTo(23.0, 2.0);
+    }
+
+    @It("should pass w/ .closeTo() when value within delta (fail)")
+    public void testCloseToFailure() {
+        expect(2.0f).to().be().closeTo(1.0, 0.99);
+    }
+
     private Map<String,String> makeTestMap() {
         Map<String, String> values = new HashMap<String, String>();
         values.put("key1", "val1");
