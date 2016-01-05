@@ -122,14 +122,24 @@ public class CalculatorTest {
         expect(new Object()).to().be().instanceOf(Calculator.class);
     }
 
-    @It("should pass when a value is ok (pass)")
+    @It("should pass w/ .ok() when a value is ok (pass)")
     public void testOkSuccess() {
         expect(5).to().be().ok();
     }
 
-    @It("should pass when a value is ok (fail)")
+    @It("should pass w/ .ok() when a value is ok (fail)")
     public void testOkFailure() {
         expect("").to().be().ok();
+    }
+
+    @It("should pass w/ .null() when the value is null (pass)")
+    public void testNullSuccess() {
+        expect(null).to().be().null_();
+    }
+
+    @It("should pass w/ .null() when the value is null (fail)")
+    public void testNullFailure() {
+        expect("").to().be().null_();
     }
 
     private Map<String,String> makeTestMap() {

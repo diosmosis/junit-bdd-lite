@@ -99,4 +99,7 @@ public interface AssertionInvoker {
 
     @AssertionMethod(klass = Asserts.class, method = "assertFalse")
     void false_();
+
+    @AssertionMethod(klass = Asserts.class, method = "assertNull")
+    void null_();
 }

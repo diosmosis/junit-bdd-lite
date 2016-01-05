@@ -75,6 +75,14 @@ public class Asserts {
         assertEquals(flags, actualValue, false);
     }
 
+    public static void assertNull(Map<String, String> flags, Object actualValue) {
+        if (hasNegate(flags)) {
+            Assert.assertNotNull(actualValue);
+        } else {
+            Assert.assertNull(actualValue);
+        }
+    }
+
     private static boolean hasNegate(Map<String, String> flags) {
         return hasBooleanFlag(flags, AssertionFlags.NEGATE);
     }
