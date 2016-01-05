@@ -6,7 +6,9 @@ import flarestar.bdd.runner.Runner;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -253,11 +255,56 @@ public class CalculatorTest {
         expect(2.0f).to().be().closeTo(1.0, 0.99);
     }
 
+    @It("should pass when all().values() used and collection contains values (pass)")
+    public void testValuesSuccess() {
+        List<String> values = makeTestList();
+
+        expect(values).to().include().all().values("item1", "item2");
+    }
+
+    @It("should pass when all().values() used and collection contains values (fail)")
+    public void testValuesFailure() {
+        expect(new String[] {"a", "b", "c"}).to().contain().values("a", "d");
+    }
+
+    @It("should pass when have().values() used and collection contains all values (pass)")
+    public void testHaveAllValuesSuccess() {
+        List<String> values = makeTestList();
+
+        expect(values).to().have().values("item1", "item2", "item3");
+    }
+
+    @It("should pass when have().values() used and map contains all values (fail)")
+    public void testHaveAllValuesFailure() {
+        Map<String, String> values = makeTestMap();
+        expect(values).to().have().values("val1", "val2");
+    }
+
+    @It("should pass when any().values() used and map contains values (pass)")
+    public void testAnyValuesSuccess() {
+        Map<String, String> values = makeTestMap();
+
+        expect(values).to().contain().any().values("notkey1", "val2");
+    }
+
+    @It("should pass when any().values() used and map contains values (fail)")
+    public void testAnyValuesFailure() {
+        expect(new int[] {1, 2, 3}).to().include().any().values(9, 10);
+    }
+
     private Map<String,String> makeTestMap() {
         Map<String, String> values = new HashMap<String, String>();
         values.put("key1", "val1");
         values.put("key2", "val2");
         values.put("key3", "val3");
         return values;
+    }
+
+    private List<String> makeTestList() {
+        List<String> result = new ArrayList<String>();
+        result.add("item1");
+        result.add("item2");
+        result.add("item3");
+        return result;
     }
 }

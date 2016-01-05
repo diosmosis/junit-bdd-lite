@@ -92,6 +92,9 @@ public interface AssertionInvoker {
     @AssertionMethod(klass = Asserts.class, method = "assertContainsKeys")
     void keys(Object... expectedKeys);
 
+    @AssertionMethod(klass = Asserts.class, method = "assertContainsValues")
+    void values(Object... expectedValues);
+
     @AssertionMethod(klass = Asserts.class, method = "assertInstanceOf")
     void a(Class<?> klass);
 

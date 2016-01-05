@@ -51,6 +51,23 @@ public class Asserts {
         Assert.assertThat((Map<?, ?>) actualValue, new ContainsAllKeysMatcher(expectedKeys, false));
     }
 
+    public static void assertContainsValues(Map<String, String> flags, Object actualValue, Object[] expectedValues) {
+        if (hasBooleanFlag(flags, AssertionFlags.ANY)) {
+            Assert.assertThat(actualValue, new ContainsAnyItemsMatcher(expectedValues));
+            return;
+        }
+
+        // for below, assume all flag
+
+        if (hasBooleanFlag(flags, AssertionFlags.HAVE)) {
+            Assert.assertThat(actualValue, new ContainsAllItemsMatcher(expectedValues, true));
+            return;
+        }
+
+        // assume all + contains
+        Assert.assertThat(actualValue, new ContainsAllItemsMatcher(expectedValues, false));
+    }
+
     public static void assertInstanceOf(Map<String, String> flags, Object actualValue, Class<?> expectedType) {
         if (hasNegate(flags)) {
             Assert.assertThat(actualValue, CoreMatchers.not(CoreMatchers.instanceOf(expectedType)));

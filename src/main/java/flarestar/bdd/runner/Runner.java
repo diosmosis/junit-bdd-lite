@@ -9,6 +9,9 @@ import org.junit.runner.notification.RunNotifier;
 
 /**
  * TODO
+ *
+ * TODO: should use ParentRunner or the Junit4 runner class for a base to better support other junit
+ *       annotations
  */
 public class Runner extends org.junit.runner.Runner {
 
