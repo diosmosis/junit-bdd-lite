@@ -6,10 +6,7 @@ import flarestar.bdd.runner.Runner;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Pattern;
 
 import static flarestar.bdd.Assert.*;
@@ -293,7 +290,7 @@ public class ExampleTest {
     }
 
     private Map<String,String> makeTestMap() {
-        Map<String, String> values = new HashMap<String, String>();
+        Map<String, String> values = new TreeMap<String, String>();
         values.put("key1", "val1");
         values.put("key2", "val2");
         values.put("key3", "val3");
