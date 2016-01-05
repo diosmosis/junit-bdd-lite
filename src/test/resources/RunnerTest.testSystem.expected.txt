@@ -1,5 +1,9 @@
 in before
 in before each
+.Ein after each
+in before each
+.in after each
+in before each
 .in after each
 in before each
 .Ein after each
@@ -9,6 +13,18 @@ in before each
 .Ein after each
 in before each
 .Ein after each
+in before each
+.in after each
+in before each
+.Ein after each
+in before each
+.Ein after each
+in before each
+.in after each
+in before each
+.Ein after each
+in before each
+.in after each
 in before each
 .Ein after each
 in before each
@@ -44,42 +60,58 @@ in before each
 in after
 
 Time:
-There were 11 failures:
-1) it should pass when any().keys() used and map contains keys (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+There were 15 failures:
+1) it should pass w/ .above() when value is greater than expected (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+java.lang.AssertionError:
+Expected: a value greater than <2L>
+     but: <1L> was less than <2L>
+2) it should pass when any().keys() used and map contains keys (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError:
 Expected: map contains any key in ["notkey1", "notkey2"]
      but: was <{key3=val3, key2=val2, key1=val1}>
-2) it should not fail this assertion (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+3) it should not fail this assertion (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError
-3) it should subtract two values correctly (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+4) it should pass w/ .below() when value is < expected (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+java.lang.AssertionError:
+Expected: a value less than <3.0>
+     but: <3.0999999046325684> was greater than <3.0>
+5) it should subtract two values correctly (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError: expected:<-4> but was:<38>
-4) it should pass w/ .empty() when collection is empty (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+6) it should pass w/ .empty() when collection is empty (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError:
 Expected: is empty collection or empty string
      but: was <{key3=val3, key2=val2, key1=val1}>
-5) it should pass when have().all().keys() used and map contains all keys (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+7) it should pass when have().all().keys() used and map contains all keys (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError:
 Expected: map contains all keys in ["key1", "key3"]
      but: was <{key3=val3, key2=val2, key1=val1}>
-6) it should pass when instanceOf() used (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+8) it should pass when instanceOf() used (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError:
 Expected: an instance of com.flarestar.bdd.tests.functional.tests.Calculator
      but: <java.lang.Object@...> is a java.lang.Object
-7) it should pass when all().keys() used and map contains keys (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+9) it should pass when all().keys() used and map contains keys (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError:
 Expected: map contains all keys in ["key1", "notkey2"]
      but: was <{key3=val3, key2=val2, key1=val1}>
-8) it should fail when value not equal to something (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+10) it should pass w/ .least() when value is >= expected (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+java.lang.AssertionError:
+Expected: a value equal to or greater than <3.0>
+     but: <2.9> was less than <3.0>
+11) it should pass w/ .most() when value is <= expected (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+java.lang.AssertionError:
+Expected: a value less than or equal to <3.09>
+     but: <3.1> was greater than <3.09>
+12) it should fail when value not equal to something (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError: Values should be different. Actual: 4
-9) it should pass w/ .null() when the value is null (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+13) it should pass w/ .null() when the value is null (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError: expected null, but was:<>
-10) it should pass w/ .ok() when a value is ok (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+14) it should pass w/ .ok() when a value is ok (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 java.lang.AssertionError:
 Expected: is ok (not null, not empty string, not false and not 0)
      but: was ""
-11) it should not throw an exception (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
+15) it should not throw an exception (fail)(com.flarestar.bdd.tests.functional.tests.CalculatorTest)
 com.flarestar.bdd.tests.functional.tests.Calculator$TemperTantrum: waaaaaah!
 
 FAILURES!!!
-Tests run: 21,  Failures: 11
+Tests run: 29,  Failures: 15
 

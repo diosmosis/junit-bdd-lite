@@ -6,6 +6,7 @@ import flarestar.bdd.assertions.matchers.IsEmpty;
 import flarestar.bdd.assertions.matchers.IsTruthyMatcher;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 import org.junit.Assert;
 
 import java.util.Map;
@@ -90,6 +91,68 @@ public class Asserts {
             matcher = CoreMatchers.not(matcher);
         }
         Assert.assertThat(actualValue, matcher);
+    }
+
+    public static void assertGreaterThan(Map<String, String> flags, Object actualValue, Comparable expectedValue) {
+        actualValue = upcastForComparison(actualValue, expectedValue);
+        expectedValue = upcastForComparison(expectedValue, actualValue);
+
+        Matcher<?> matcher = Matchers.greaterThan(expectedValue);
+        if (hasNegate(flags)) {
+            matcher = Matchers.not(matcher);
+        }
+        Assert.assertThat(actualValue, (Matcher)matcher);
+    }
+
+    public static void assertGreaterThanOrEqual(Map<String, String> flags, Object actualValue, Comparable expectedValue) {
+        actualValue = upcastForComparison(actualValue, expectedValue);
+        expectedValue = upcastForComparison(expectedValue, actualValue);
+
+        Matcher<?> matcher = Matchers.greaterThanOrEqualTo(expectedValue);
+        if (hasNegate(flags)) {
+            matcher = Matchers.not(matcher);
+        }
+        Assert.assertThat(actualValue, (Matcher)matcher);
+    }
+
+    public static void assertLessThan(Map<String, String> flags, Object actualValue, Comparable expectedValue) {
+        actualValue = upcastForComparison(actualValue, expectedValue);
+        expectedValue = upcastForComparison(expectedValue, actualValue);
+
+        Matcher<?> matcher = Matchers.lessThan(expectedValue);
+        if (hasNegate(flags)) {
+            matcher = Matchers.not(matcher);
+        }
+        Assert.assertThat(actualValue, (Matcher)matcher);
+    }
+
+    public static void assertLessThanOrEqual(Map<String, String> flags, Object actualValue, Comparable expectedValue) {
+        actualValue = upcastForComparison(actualValue, expectedValue);
+        expectedValue = upcastForComparison(expectedValue, actualValue);
+
+        Matcher<?> matcher = Matchers.lessThanOrEqualTo(expectedValue);
+        if (hasNegate(flags)) {
+            matcher = Matchers.not(matcher);
+        }
+        Assert.assertThat(actualValue, (Matcher)matcher);
+    }
+
+    private static Comparable upcastForComparison(Object toUpcast, Object toCompare) {
+        if (!(toUpcast instanceof Number) || !(toCompare instanceof Number) || toUpcast.getClass() == toCompare.getClass()) {
+            return (Comparable)toUpcast;
+        }
+
+        // if comparing w/ a floating point, convert this one to double
+        if (Float.class.isInstance(toUpcast) || Float.class.isInstance(toCompare) || Double.class.isInstance(toCompare)) {
+            return ((Number)toUpcast).doubleValue();
+        }
+
+        // if comparable is not a floating point, convert to long
+        if (!Float.class.isInstance(toUpcast) && !Double.class.isInstance(toUpcast)) {
+            return ((Number)toUpcast).longValue();
+        }
+
+        return (Comparable)toUpcast;
     }
 
     private static boolean hasNegate(Map<String, String> flags) {

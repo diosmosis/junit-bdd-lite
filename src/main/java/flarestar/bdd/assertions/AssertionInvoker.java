@@ -6,6 +6,9 @@ import flarestar.bdd.annotations.ChainableMethod;
 /**
  * TODO
  *
+ * TODO: try to use generics more, ie, use type passed as actual value to help determine what params
+ *       methods should accept.
+ * TODO: try to reimplement by only using hamcrest matchers. maybe pass Matcher classes to @AssertionMethods & @ChainableMethods
  * TODO: following chai.js methods are not currently implemented, but probably should be
  * - deep()
  */
@@ -105,4 +108,16 @@ public interface AssertionInvoker {
 
     @AssertionMethod(klass = Asserts.class, method = "assertEmpty")
     void empty();
+
+    @AssertionMethod(klass = Asserts.class, method = "assertGreaterThan")
+    void above(Comparable expectedValue);
+
+    @AssertionMethod(klass = Asserts.class, method = "assertGreaterThanOrEqual")
+    void least(Comparable expectedValue);
+
+    @AssertionMethod(klass = Asserts.class, method = "assertLessThan")
+    void below(Comparable expectedValue);
+
+    @AssertionMethod(klass = Asserts.class, method = "assertLessThanOrEqual")
+    void most(Comparable expectedValue);
 }

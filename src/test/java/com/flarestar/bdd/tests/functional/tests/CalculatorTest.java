@@ -152,6 +152,46 @@ public class CalculatorTest {
         expect(makeTestMap()).to().be().empty();
     }
 
+    @It("should pass w/ .above() when value is greater than expected (pass)")
+    public void testAboveSuccess() {
+        expect(5).to().be().above(2);
+    }
+
+    @It("should pass w/ .above() when value is greater than expected (fail)")
+    public void testAboveFailre() {
+        expect(1L).to().be().above(2);
+    }
+
+    @It("should pass w/ .least() when value is >= expected (pass)")
+    public void testLeastSuccess() {
+        expect(3.1).to().be().at().least(3);
+    }
+
+    @It("should pass w/ .least() when value is >= expected (fail)")
+    public void testLeastFailure() {
+        expect(2.9).to().be().at().least(3);
+    }
+
+    @It("should pass w/ .below() when value is < expected (pass)")
+    public void testBelowSuccess() {
+        expect(3.1f).to().be().below(3.2f);
+    }
+
+    @It("should pass w/ .below() when value is < expected (fail)")
+    public void testBelowFailure() {
+        expect(3.1f).to().be().below(3.0);
+    }
+
+    @It("should pass w/ .most() when value is <= expected (pass)")
+    public void testMostSuccess() {
+        expect(3.1f).to().be().at().most(3.1f);
+    }
+
+    @It("should pass w/ .most() when value is <= expected (fail)")
+    public void testMostFailure() {
+        expect(3.1).to().be().at().most(3.09);
+    }
+
     private Map<String,String> makeTestMap() {
         Map<String, String> values = new HashMap<String, String>();
         values.put("key1", "val1");
