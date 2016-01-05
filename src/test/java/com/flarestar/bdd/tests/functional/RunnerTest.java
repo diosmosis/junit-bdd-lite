@@ -12,13 +12,12 @@ import org.junit.runner.RunWith;
 import org.junit.runner.notification.Failure;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.Scanner;
 
 /**
  * Functional test that tests the whole system, including the JUnit output that is generated.
@@ -81,8 +80,6 @@ public class RunnerTest {
             throw new RuntimeException("Cannot find resource: " + path);
         }
 
-        URI resource = resourceUrl.toURI();
-        byte[] data = Files.readAllBytes(Paths.get(resource));
-        return new String(data);
+        return (new Scanner(new File(resourceUrl.getFile()))).useDelimiter("\\Z").next() + "\n";
     }
 }
