@@ -16,6 +16,8 @@ import java.util.Map;
  */
 public class AssertionInvocationHandler implements InvocationHandler {
 
+    // TODO: use javaassist so we can use fields for some chainable methods & assertion methods
+
     public static final Object NO_VALUE = new Object();
 
     private Object value;

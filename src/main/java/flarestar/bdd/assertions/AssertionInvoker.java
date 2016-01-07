@@ -8,15 +8,18 @@ import java.util.regex.Pattern;
 
 /**
  * TODO
- *
- * TODO: try to use generics more, ie, use type passed as actual value to help determine what params
- *       methods should accept.
- * TODO: try to reimplement by only using hamcrest matchers. maybe pass Matcher classes to @AssertionMethods & @ChainableMethods
- * TODO: following chai.js methods are not currently implemented, but probably should be
- * - deep()
- * - throw()
  */
 public interface AssertionInvoker {
+
+    /*
+     * TODO: try to use generics more, ie, use type passed as actual value to help determine what params
+     *       methods should accept.
+     * TODO: try to reimplement by only using hamcrest matchers. maybe pass Matcher classes to @AssertionMethods & @ChainableMethods
+     * TODO: following chai.js methods are not currently implemented, but probably should be
+     * - deep()
+     * - throw()
+     */
+
     // chainable no-op methods
     @ChainableMethod
     AssertionInvoker to();
