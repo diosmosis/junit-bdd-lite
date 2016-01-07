@@ -150,4 +150,10 @@ public interface AssertionInvoker {
 
     @AssertionMethod(klass = Asserts.class, method = "assertThrows")
     void throw_(Class<? extends Throwable> throwableClass);
+
+    @AssertionMethod(klass = Asserts.class, method = "assertThrows")
+    void throw_(Class<? extends Throwable> throwableClass, String expectedMessage);
+
+    @AssertionMethod(klass = Asserts.class, method = "assertThrows")
+    void throw_(Class<? extends Throwable> throwableClass, Pattern expectedMessage);
 }

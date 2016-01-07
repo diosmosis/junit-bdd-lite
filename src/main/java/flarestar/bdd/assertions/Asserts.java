@@ -206,7 +206,25 @@ public class Asserts {
     }
 
     public static void assertThrows(Map<String, String> flags, Object actualValue, Class<? extends Throwable> throwableClass) {
-        Matcher<Object> matcher = new CheckThrowsMatcher(throwableClass);
+        Matcher<Object> matcher = new CheckThrowsMatcher(throwableClass, null, null);
+        if (hasNegate(flags)) {
+            matcher = Matchers.not(matcher);
+        }
+        Assert.assertThat(actualValue, matcher);
+    }
+
+    public static void assertThrows(Map<String, String> flags, Object actualValue, Class<? extends Throwable> throwableClass,
+                                    String expectedMessageContains) {
+        Matcher<Object> matcher = new CheckThrowsMatcher(throwableClass, expectedMessageContains, null);
+        if (hasNegate(flags)) {
+            matcher = Matchers.not(matcher);
+        }
+        Assert.assertThat(actualValue, matcher);
+    }
+
+    public static void assertThrows(Map<String, String> flags, Object actualValue, Class<? extends Throwable> throwableClass,
+                                    Pattern expectedMessagePattern) {
+        Matcher<Object> matcher = new CheckThrowsMatcher(throwableClass, null, expectedMessagePattern);
         if (hasNegate(flags)) {
             matcher = Matchers.not(matcher);
         }
