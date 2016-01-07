@@ -17,6 +17,8 @@ import java.util.*;
  */
 public class BddSuite implements Test, Describable {
 
+    // TODO: allow non-static inner classes (currently we assume inner classes are static)
+
     private Class<?> testKlass;
     private Class<?>[] testTargets;
     private String customDescription;

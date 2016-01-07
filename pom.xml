@@ -4,7 +4,7 @@
   <groupId>com.flarestarsoftware</groupId>
   <artifactId>bdd</artifactId>
   <packaging>jar</packaging>
-  <version>0.1.0</version>
+  <version>0.1.1-SNAPSHOT</version>
   <name>bdd</name>
   <description>Lightweight mocha/chai/jasmine BDD interface for Java tests.</description>
   <url>https://github.com/diosmosis/junit-bdd-lite</url>

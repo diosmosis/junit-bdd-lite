@@ -205,6 +205,14 @@ public class Asserts {
         }
     }
 
+    public static void assertThrows(Map<String, String> flags, Object actualValue, Class<? extends Throwable> throwableClass) {
+        Matcher<Object> matcher = new CheckThrowsMatcher(throwableClass);
+        if (hasNegate(flags)) {
+            matcher = Matchers.not(matcher);
+        }
+        Assert.assertThat(actualValue, matcher);
+    }
+
     private static Comparable upcastForComparison(Object toUpcast, Object toCompare) {
         if (!(toUpcast instanceof Number) || !(toCompare instanceof Number) || toUpcast.getClass() == toCompare.getClass()) {
             return (Comparable)toUpcast;

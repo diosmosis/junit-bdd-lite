@@ -17,7 +17,6 @@ public interface AssertionInvoker {
      * TODO: try to reimplement by only using hamcrest matchers. maybe pass Matcher classes to @AssertionMethods & @ChainableMethods
      * TODO: following chai.js methods are not currently implemented, but probably should be
      * - deep()
-     * - throw()
      */
 
     // chainable no-op methods
@@ -146,6 +145,9 @@ public interface AssertionInvoker {
     @AssertionMethod(klass = Asserts.class, method = "assertContainsString")
     void string(String substring);
 
-    @AssertionMethod(klass = Asserts.class,method = "assertEqualsWithPrecision")
+    @AssertionMethod(klass = Asserts.class, method = "assertEqualsWithPrecision")
     void closeTo(double expectedValue, double precision);
+
+    @AssertionMethod(klass = Asserts.class, method = "assertThrows")
+    void throw_(Class<? extends Throwable> throwableClass);
 }
