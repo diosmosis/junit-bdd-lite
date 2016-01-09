@@ -13,7 +13,7 @@ import java.lang.reflect.Method;
 /**
  * TODO
  */
-public class BddTest implements Test, Describable {
+public class BddTest implements Test, Describable, BddTestInterface {
 
     private Method method;
     private Object testSuiteInstance;

@@ -37,6 +37,72 @@ public class ExampleTest {
         System.out.println("in after each");
     }
 
+    @Describe(desc = "inner 1")
+    public class InnerTest1 {
+        public void beforeEach() {
+            System.out.println("[inner] in before each");
+        }
+
+        public void afterEach() {
+            System.out.println("[inner] in after each");
+        }
+
+        @It("should run this test (fail)")
+        public void testOnly() {
+            expect(false).to().be().true_();
+        }
+
+        @It("should not fail this test")
+        public void testPass() {
+            expect(calculator).to().be().instanceOf(Calculator.class);
+        }
+
+        @Describe(desc = "inner 1.1")
+        public class InnerTest2 {
+            public void beforeEach() {
+                System.out.println("[inner 1.1] in before each");
+            }
+
+            public void afterEach() {
+                System.out.println("[inner 1.1] in after each");
+            }
+
+            @It("should run this test also (fail)")
+            public void testOnly() {
+                expect(false).to().be().true_();
+            }
+
+            @It("should not fail this test also")
+            public void testPass() {
+                expect(calculator).to().be().instanceOf(Calculator.class);
+            }
+        }
+    }
+
+    @Describe(desc = "inner 1")
+    public static class InnerTest2 {
+        public static void before() {
+            System.out.println("[inner 2] in before");
+        }
+
+        public static void after() {
+            System.out.println("[inner 2] in after");
+        }
+
+        public void beforeEach() {
+            System.out.println("[inner 2] in before each");
+        }
+
+        public void afterEach() {
+            System.out.println("[inner 2] in after each");
+        }
+
+        @It("should run this test as well (fail)")
+        public void testOnly() {
+            expect(false).to().be().true_();
+        }
+    }
+
     @It("should not throw an exception (fail)")
     public void testThrowException() throws Exception {
         this.calculator.failAtNotThrowing();

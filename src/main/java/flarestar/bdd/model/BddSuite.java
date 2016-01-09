@@ -10,12 +10,13 @@ import org.junit.runner.Description;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.*;
 
 /**
  * TODO
  */
-public class BddSuite implements Test, Describable {
+public class BddSuite implements Test, Describable, BddTestInterface {
 
     // TODO: allow non-static inner classes (currently we assume inner classes are static)
 
@@ -27,6 +28,7 @@ public class BddSuite implements Test, Describable {
     private Method afterMethod;
     private Method beforeEachMethod;
     private Method afterEachMethod;
+    private Object parentTestSuiteInstance = null;
 
     public BddSuite(Class<?> testKlass) {
         this.testKlass = testKlass;
@@ -77,10 +79,14 @@ public class BddSuite implements Test, Describable {
         });
     }
 
+    public void setTestSuiteInstance(Object testSuiteInstance) {
+        parentTestSuiteInstance = testSuiteInstance;
+    }
+
     private void runTest(final Test test, final TestResult testResult) throws Throwable {
         Object testCase = createTestCaseInstance();
-        if (test instanceof BddTest) {
-            ((BddTest) test).setTestSuiteInstance(testCase);
+        if (test instanceof BddTestInterface) {
+            ((BddTestInterface) test).setTestSuiteInstance(testCase);
         }
 
         runSurrounded(testCase, beforeEachMethod, afterEachMethod, new Protectable() {
@@ -202,7 +208,11 @@ public class BddSuite implements Test, Describable {
 
     private Object createTestCaseInstance() throws Throwable {
         try {
-            return testKlass.newInstance();
+            if (!testKlass.isMemberClass() || Modifier.isStatic(testKlass.getModifiers())) {
+                return testKlass.newInstance();
+            } else {
+                return testKlass.getConstructor(parentTestSuiteInstance.getClass()).newInstance(parentTestSuiteInstance);
+            }
         } catch (InstantiationException e) {
             e.fillInStackTrace();
             throw e;

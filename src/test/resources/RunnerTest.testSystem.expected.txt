@@ -1,5 +1,23 @@
 in before
 in before each
+[inner 2] in before
+[inner 2] in before each
+.E[inner 2] in after each
+[inner 2] in after
+in after each
+in before each
+[inner] in before each
+[inner 1.1] in before each
+.E[inner 1.1] in after each
+[inner 1.1] in before each
+.[inner 1.1] in after each
+[inner] in after each
+[inner] in before each
+.E[inner] in after each
+[inner] in before each
+.[inner] in after each
+in after each
+in before each
 .Ein after each
 in before each
 .in after each
@@ -96,92 +114,98 @@ in before each
 in after
 
 Time:
-There were 24 failures:
-1) it should pass w/ .above() when value is greater than expected (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
+There were 27 failures:
+1) it should run this test as well (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest$InnerTest2)
+java.lang.AssertionError: expected:<true> but was:<false>
+2) it should run this test also (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest$InnerTest1$InnerTest2)
+java.lang.AssertionError: expected:<true> but was:<false>
+3) it should run this test (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest$InnerTest1)
+java.lang.AssertionError: expected:<true> but was:<false>
+4) it should pass w/ .above() when value is greater than expected (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
 java.lang.AssertionError:
 Expected: a value greater than <2L>
      but: <1L> was less than <2L>
-2) it should pass when any().keys() used and map contains keys (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
+5) it should pass when any().keys() used and map contains keys (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
 java.lang.AssertionError:
 Expected: map contains any key in ["notkey1", "notkey2"]
      but: was <{key1=val1, key2=val2, key3=val3}>
-3) it should pass when any().values() used and map contains values (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
+6) it should pass when any().values() used and map contains values (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
 java.lang.AssertionError:
 Expected: array or collection containing any value in [<9>, <10>]
      but: was [<1>, <2>, <3>]
-4) it should not fail this assertion (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
+7) it should not fail this assertion (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
 java.lang.AssertionError
-5) it should pass w/ .below() when value is < expected (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
+8) it should pass w/ .below() when value is < expected (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
 java.lang.AssertionError:
 Expected: a value less than <3.0>
      but: <3.0999999046325684> was greater than <3.0>
-6) it should subtract two values correctly (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
+9) it should subtract two values correctly (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
 java.lang.AssertionError: expected:<-4> but was:<38>
-7) it should pass w/ .closeTo() when value within delta (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
+10) it should pass w/ .closeTo() when value within delta (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
 java.lang.AssertionError: expected:<1.0> but was:<2.0>
-8) it should pass w/ .empty() when collection is empty (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
+11) it should pass w/ .empty() when collection is empty (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
 java.lang.AssertionError:
 Expected: is empty collection or empty string
      but: was <{key1=val1, key2=val2, key3=val3}>
-9) it should pass w/ .string() when string contains string (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
+12) it should pass w/ .string() when string contains string (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
 java.lang.AssertionError:
 Expected: a string containing "ooga"
      but: was "here is a string"
-10) it should pass when have().all().keys() used and map contains all keys (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
+13) it should pass when have().all().keys() used and map contains all keys (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
 java.lang.AssertionError:
 Expected: map contains all keys in ["key1", "key3"]
      but: was <{key1=val1, key2=val2, key3=val3}>
-11) it should pass when have().values() used and map contains all values (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
+14) it should pass when have().values() used and map contains all values (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
 java.lang.AssertionError:
 Expected: array or collection containing all values in ["val1", "val2"]
      but: was <{key1=val1, key2=val2, key3=val3}>
-12) it should pass when instanceOf() used (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
+15) it should pass when instanceOf() used (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
 java.lang.AssertionError:
 Expected: an instance of com.flarestar.bdd.tests.functional.tests.Calculator
      but: <java.lang.Object@...> is a java.lang.Object
-13) it should pass when all().keys() used and map contains keys (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
+16) it should pass when all().keys() used and map contains keys (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
 java.lang.AssertionError:
 Expected: map contains all keys in ["key1", "notkey2"]
      but: was <{key1=val1, key2=val2, key3=val3}>
-14) it should pass w/ .least() when value is >= expected (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
+17) it should pass w/ .least() when value is >= expected (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
 java.lang.AssertionError:
 Expected: a value equal to or greater than <3.0>
      but: <2.9> was less than <3.0>
-15) it should change the value passed to expect() to the length when .length() is used in a chain (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
+18) it should change the value passed to expect() to the length when .length() is used in a chain (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
 java.lang.AssertionError:
 Expected: a value greater than <10L>
      but: <3L> was less than <10L>
-16) it should pass w/ .length(...) when length of collection is equal (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
+19) it should pass w/ .length(...) when length of collection is equal (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
 java.lang.AssertionError:
 Expected: collection, array or string with length <1L>
      but: was <3L>
-17) it should pass w/ .matches() when string matches pattern (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
+20) it should pass w/ .matches() when string matches pattern (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
 java.lang.AssertionError:
 Expected: to match ^ab$
      but: was "ababbbabab"
-18) it should pass w/ .most() when value is <= expected (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
+21) it should pass w/ .most() when value is <= expected (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
 java.lang.AssertionError:
 Expected: a value less than or equal to <3.09>
      but: <3.1> was greater than <3.09>
-19) it should fail when value not equal to something (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
+22) it should fail when value not equal to something (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
 java.lang.AssertionError: Values should be different. Actual: 4
-20) it should pass w/ .null() when the value is null (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
+23) it should pass w/ .null() when the value is null (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
 java.lang.AssertionError: expected null, but was:<>
-21) it should pass w/ .ok() when a value is ok (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
+24) it should pass w/ .ok() when a value is ok (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
 java.lang.AssertionError:
 Expected: is ok (not null, not empty string, not false and not 0)
      but: was ""
-22) it should not throw an exception (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
+25) it should not throw an exception (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
 com.flarestar.bdd.tests.functional.tests.Calculator$TemperTantrum: waaaaaah!
-23) it should pass when all().values() used and collection contains values (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
+26) it should pass when all().values() used and collection contains values (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
 java.lang.AssertionError:
 Expected: array or collection containing all values in ["a", "d"]
      but: was ["a", "b", "c"]
-24) it should pass w/ .assertWithin() when value is within range (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
+27) it should pass w/ .assertWithin() when value is within range (fail)(com.flarestar.bdd.tests.functional.tests.ExampleTest)
 java.lang.AssertionError:
 Expected: (a value equal to or greater than <2.9000000953674316> and a value less than or equal to <4.1>)
      but: a value equal to or greater than <2.9000000953674316> <2.0> was less than <2.9000000953674316>
 
 FAILURES!!!
-Tests run: 47,  Failures: 24
+Tests run: 52,  Failures: 27
 
