@@ -28,10 +28,13 @@ public class BddSuite implements Test, Describable, BddTestInterface {
     private Method afterMethod;
     private Method beforeEachMethod;
     private Method afterEachMethod;
-    private Object parentTestSuiteInstance = null;
 
-    public BddSuite(Class<?> testKlass) {
+    private BddSuite parentTestSuite;
+    private Object testSuiteInstance = null;
+
+    public BddSuite(Class<?> testKlass, BddSuite parentTestSuite) {
         this.testKlass = testKlass;
+        this.parentTestSuite = parentTestSuite;
 
         Describe annotation = testKlass.getAnnotation(Describe.class);
         if (annotation == null) {
@@ -76,28 +79,37 @@ public class BddSuite implements Test, Describable, BddTestInterface {
                     runTest(test, testResult);
                 }
             }
-        });
+        }, false);
     }
 
     public void setTestSuiteInstance(Object testSuiteInstance) {
-        parentTestSuiteInstance = testSuiteInstance;
+        this.testSuiteInstance = testSuiteInstance;
     }
 
     private void runTest(final Test test, final TestResult testResult) throws Throwable {
         Object testCase = createTestCaseInstance();
-        if (test instanceof BddTestInterface) {
-            ((BddTestInterface) test).setTestSuiteInstance(testCase);
-        }
+        setTestSuiteInstance(testCase);
 
-        runSurrounded(testCase, beforeEachMethod, afterEachMethod, new Protectable() {
-            public void protect() throws Throwable {
-                test.run(testResult);
-            }
-        });
+        if (test instanceof BddTest) {
+            ((BddTest) test).setTestSuiteInstance(testCase);
+
+            runSurrounded(testCase, beforeEachMethod, afterEachMethod, new Protectable() {
+                public void protect() throws Throwable {
+                    test.run(testResult);
+                }
+            }, true);
+        } else { // assume BddSuite
+            test.run(testResult);
+        }
     }
 
-    private void runSurrounded(Object testCaseInstance, Method beforeMethod, Method afterMethod, Protectable protectable) throws Throwable {
-        runMethod(testCaseInstance, beforeMethod);
+    private void runSurrounded(Object testCaseInstance, Method beforeMethod, Method afterMethod, Protectable protectable,
+                               boolean isEachMethod) throws Throwable {
+        if (isEachMethod) {
+            runBeforeEachChain();
+        } else {
+            runMethod(testCaseInstance, beforeMethod);
+        }
 
         Throwable caught = null;
         try {
@@ -106,7 +118,11 @@ public class BddSuite implements Test, Describable, BddTestInterface {
             caught = throwable;
         } finally {
             try {
-                runMethod(testCaseInstance, afterMethod);
+                if (isEachMethod) {
+                    runAfterEachChain();
+                } else {
+                    runMethod(testCaseInstance, afterMethod);
+                }
             } catch (Throwable throwable) {
                 if (caught == null) {
                     caught = throwable;
@@ -117,6 +133,20 @@ public class BddSuite implements Test, Describable, BddTestInterface {
         if (caught != null) {
             throw caught;
         }
+    }
+
+    private void runAfterEachChain() throws Throwable {
+        for (BddSuite suite = this; suite != null; suite = suite.parentTestSuite) {
+            suite.runMethod(suite.testSuiteInstance, suite.afterEachMethod);
+        }
+    }
+
+    private void runBeforeEachChain() throws Throwable {
+        if (parentTestSuite != null) {
+            parentTestSuite.runBeforeEachChain();
+        }
+
+        runMethod(testSuiteInstance, beforeEachMethod);
     }
 
     private void runMethod(Object testCaseInstance, Method method) throws Throwable {
@@ -175,7 +205,7 @@ public class BddSuite implements Test, Describable, BddTestInterface {
                 continue;
             }
 
-            tests.add(new BddSuite(childClass));
+            tests.add(new BddSuite(childClass, this));
         }
 
         List<Method> methods = Arrays.asList(testKlass.getDeclaredMethods());
@@ -211,7 +241,7 @@ public class BddSuite implements Test, Describable, BddTestInterface {
             if (!testKlass.isMemberClass() || Modifier.isStatic(testKlass.getModifiers())) {
                 return testKlass.newInstance();
             } else {
-                return testKlass.getConstructor(parentTestSuiteInstance.getClass()).newInstance(parentTestSuiteInstance);
+                return testKlass.getConstructor(parentTestSuite.testSuiteInstance.getClass()).newInstance(parentTestSuite.testSuiteInstance);
             }
         } catch (InstantiationException e) {
             e.fillInStackTrace();

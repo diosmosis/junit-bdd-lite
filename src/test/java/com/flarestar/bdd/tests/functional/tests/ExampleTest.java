@@ -79,7 +79,7 @@ public class ExampleTest {
         }
     }
 
-    @Describe(desc = "inner 1")
+    @Describe(desc = "inner 2")
     public static class InnerTest2 {
         public static void before() {
             System.out.println("[inner 2] in before");

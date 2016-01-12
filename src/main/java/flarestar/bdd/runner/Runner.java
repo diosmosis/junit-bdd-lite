@@ -47,7 +47,7 @@ public class Runner extends org.junit.runner.Runner {
     private volatile BddSuite testSuite;
 
     public Runner(Class<?> testKlass) {
-        this.testSuite = new BddSuite(testKlass);
+        this.testSuite = new BddSuite(testKlass, null);
     }
 
     @Override

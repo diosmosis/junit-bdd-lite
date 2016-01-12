@@ -1,19 +1,27 @@
 in before
-in before each
 [inner 2] in before
+in before each
 [inner 2] in before each
 .E[inner 2] in after each
-[inner 2] in after
 in after each
+[inner 2] in after
 in before each
 [inner] in before each
 [inner 1.1] in before each
 .E[inner 1.1] in after each
+[inner] in after each
+in after each
+in before each
+[inner] in before each
 [inner 1.1] in before each
 .[inner 1.1] in after each
 [inner] in after each
+in after each
+in before each
 [inner] in before each
 .E[inner] in after each
+in after each
+in before each
 [inner] in before each
 .[inner] in after each
 in after each
