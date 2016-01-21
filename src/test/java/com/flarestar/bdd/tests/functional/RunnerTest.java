@@ -7,6 +7,7 @@ import flarestar.bdd.runner.Runner;
 import org.junit.Assert;
 import org.junit.internal.TextListener;
 import org.junit.runner.Computer;
+import org.junit.runner.Description;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.RunWith;
 import org.junit.runner.notification.Failure;
