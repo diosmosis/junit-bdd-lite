@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * TODO
  *
- * NOTE: this runner can contain Runner instances & FrameworkMethod instances, so we have to inherit
+ * NOTE: this runner can contain Runner instances &amp; FrameworkMethod instances, so we have to inherit
  * from ParentRunner&lt;Object&gt;
  */
 public class Runner extends ParentRunner<Object> {
