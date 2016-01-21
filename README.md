@@ -65,8 +65,6 @@ to JavaScript exists in junit-bdd-lite as well.
 
 - Some assertions that are provided by Chai and could exist in Java are currently missing,
   eg, asserting deep equality of objects.
-- The runner is not well integrated into Junit, so it's not possible to use annotations
-  that are meant to be used in normal junit tests.
 
 ## Custom Assertions
 
