@@ -1,6 +1,7 @@
 package flarestar.bdd.assertions;
 
 import flarestar.bdd.assertions.matchers.*;
+import flarestar.bdd.assertions.utility.Pair;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
@@ -66,6 +67,23 @@ public class Asserts {
 
         // assume all + contains
         Assert.assertThat(actualValue, new ContainsAllItemsMatcher(expectedValues, false));
+    }
+
+    public static void assertContainsMappings(Map<String, String> flags, Object actualValue, Pair<?>[] expectedValues) {
+        if (hasBooleanFlag(flags, AssertionFlags.ANY)) {
+            Assert.assertThat((Map<?, ?>) actualValue, new ContainsAnyPairsMatcher(expectedValues));
+            return;
+        }
+
+        // for below, assume all flag
+
+        if (hasBooleanFlag(flags, AssertionFlags.HAVE)) {
+            Assert.assertThat((Map<?, ?>) actualValue, new ContainsAllPairsMatcher(expectedValues, true));
+            return;
+        }
+
+        // assume all + contains
+        Assert.assertThat((Map<?, ?>) actualValue, new ContainsAllPairsMatcher(expectedValues, false));
     }
 
     public static void assertInstanceOf(Map<String, String> flags, Object actualValue, Class<?> expectedType) {

@@ -3,6 +3,7 @@ package flarestar.bdd.assertions;
 import flarestar.bdd.annotations.AssertionMethod;
 import flarestar.bdd.annotations.ChainableMethod;
 import flarestar.bdd.assertions.manipulators.GetLengthOf;
+import flarestar.bdd.assertions.utility.Pair;
 
 import java.util.regex.Pattern;
 
@@ -96,6 +97,9 @@ public interface AssertionInvoker {
 
     @AssertionMethod(klass = Asserts.class, method = "assertContainsValues")
     void values(Object... expectedValues);
+
+    @AssertionMethod(klass = Asserts.class, method = "assertContainsMappings")
+    void pairs(Pair<?>... expectedMappings);
 
     @AssertionMethod(klass = Asserts.class, method = "assertInstanceOf")
     void a(Class<?> klass);

@@ -2,6 +2,7 @@ package com.flarestar.bdd.tests.functional.tests;
 
 import flarestar.bdd.annotations.Describe;
 import flarestar.bdd.annotations.It;
+import flarestar.bdd.assertions.utility.Pair;
 import flarestar.bdd.runner.Runner;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
@@ -353,6 +354,48 @@ public class ExampleTest {
     @It("should pass when any().values() used and map contains values (fail)")
     public void testAnyValuesFailure() {
         expect(new int[] {1, 2, 3}).to().include().any().values(9, 10);
+    }
+
+    @It("should pass when all().pairs() used and collection contains pairs (pass)")
+    public void testPairsSuccess() {
+        Map<String, String> values = makeTestMap();
+
+        expect(values).to().include().all().pairs(Pair.make("key1", "val1"), Pair.make("key2", "val2"), Pair.make("key3", "val3"));
+    }
+
+    @It("should pass when all().pairs() used and collection contains pairs (fail)")
+    public void testPairsFailure() {
+        Map<String, String> values = makeTestMap();
+
+        expect(values).to().include().all().pairs(Pair.make("key1", "val1"), Pair.make("key3", "yo3"));
+    }
+
+    @It("should pass when have().pairs() used and collection contains pairs (pass)")
+    public void testHaveAllPairsSuccess() {
+        Map<String, String> values = makeTestMap();
+
+        expect(values).to().have().pairs(Pair.make("key1", "val1"), Pair.make("key2", "val2"), Pair.make("key3", "val3"));
+    }
+
+    @It("should pass when have().pairs() used and collection contains pairs (fail)")
+    public void testHaveAllPairsFailure() {
+        Map<String, String> values = makeTestMap();
+
+        expect(values).to().have().pairs(Pair.make("key1", "val2"), Pair.make("key3", "val1"), Pair.make("key2", "val4"));
+    }
+
+    @It("should pass when any().pairs() used and collection contains pairs (pass)")
+    public void testHaveAnyPairsSuccess() {
+        Map<String, String> values = makeTestMap();
+
+        expect(values).to().contain().any().pairs(Pair.make("abc", "def"), Pair.make("key1", "val1"), Pair.make("jkl", "ghi"));
+    }
+
+    @It("should pass when any().pairs() used and collection contains pairs (fail)")
+    public void testHaveAnyPairsFailure() {
+        Map<String, String> values = makeTestMap();
+
+        expect(values).to().contain().any().pairs(Pair.make("abc", "def"), Pair.make("key4", "val1"), Pair.make("jkl", "ghi"));
     }
 
     private Map<String,String> makeTestMap() {
