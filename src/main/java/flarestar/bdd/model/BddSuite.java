@@ -28,7 +28,7 @@ public class BddSuite {
 
     public Iterable<Class<?>> getInnerSuites() {
         List<Class<?>> result = new ArrayList<Class<?>>();
-        for (Class<?> innerClass : testKlass.getDeclaredClasses()) {
+        for (Class<?> innerClass : testKlass.getClasses()) {
             if (innerClass.getAnnotation(Describe.class) == null) {
                 continue;
             }
@@ -40,7 +40,7 @@ public class BddSuite {
 
     public Iterable<Method> getTestMethods() {
         List<Method> methods = new ArrayList<Method>();
-        for (Method method : testKlass.getDeclaredMethods()) {
+        for (Method method : testKlass.getMethods()) {
             if (method.getAnnotation(It.class) == null) {
                 continue;
             }
